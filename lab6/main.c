@@ -128,6 +128,8 @@ int Quit(int argc, char *argv[])
 #include<netdb.h>
 #include<errno.h>
 
+#include "dnsquery.c"
+
 int http_client(int argc, char *argv[])
 {
     int socket_desc;
@@ -140,7 +142,7 @@ int http_client(int argc, char *argv[])
         printf("Could not create socket");
     }
 
-    char ip[20] = "192.30.255.113";
+    char ip[20] = Gethostbyname();
     char *hostname = "github.com";
     /*struct hostent *hp;
     if ((hp = gethostbyname(hostname)) == NULL) {
@@ -406,7 +408,7 @@ int    SetDefaultGateway()
 }
 
 #include "getroute.c"
-#include "dnsquery.c"
+
 int main()
 {
     BringUpNetInterface();
