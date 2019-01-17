@@ -86,7 +86,7 @@ typedef struct
 } QUERY;
 
 //int main( int argc , char *argv[])
-int Gethostbyname()
+char* Gethostbyname()
 {
 	unsigned char hostname[100] = "github.com";
 
@@ -98,15 +98,15 @@ int Gethostbyname()
 	//scanf("%s" , hostname);
 	
 	//Now get the ip of this hostname , A record
-	ngethostbyname(hostname , T_A);
+	char* ip=ngethostbyname(hostname , T_A);
 
-	return 0;
+	return ip;
 }
 
 /*
  * Perform a DNS query by sending a packet
  * */
-void ngethostbyname(unsigned char *host , int query_type)
+char* ngethostbyname(unsigned char *host , int query_type)
 {
 	unsigned char buf[65536],*qname,*reader;
 	int i , j , stop , s;
@@ -301,7 +301,7 @@ void ngethostbyname(unsigned char *host , int query_type)
 		}
 		printf("\n");
 	}
-	return;
+	return inet_ntoa(a.sin_addr);
 }
 
 /*
